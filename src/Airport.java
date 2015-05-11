@@ -1,3 +1,14 @@
+/*
+Author: Conner Anderson
+Class : CSCI 330 - Relational Databases
+Due   : 4/16/2015
+
+Purpose of file:
+    This file is used to help create a workable object from
+    abstracted airport data. There is also a function that
+    can help determine the distance between two given airports.
+ */
+
 public class Airport {
 
     private String codeName;
@@ -8,6 +19,17 @@ public class Airport {
     private double lat, lon;
     private int worldCode;
 
+    /**
+     * Airport - an airport located around Earth
+     * @param codeName Unique code name of the airport
+     * @param longName Actual name of the airport
+     * @param cityName City location of the airport
+     * @param countryName Country the airport is located in
+     * @param countryCode Short-name for the country name
+     * @param lat Latitude of the airport
+     * @param lon Longitude of the airport
+     * @param worldCode Region area code of the airport
+     */
     public Airport(String codeName, String longName, String cityName, String countryName, String countryCode,
                    double lat, double lon, int worldCode) {
         this.codeName = codeName;
@@ -20,9 +42,12 @@ public class Airport {
         this.worldCode = worldCode;
     }
 
+    /* Retrieve an airports latitude */
     public double getLat() {
         return lat;
     }
+
+    /* Retrieve an airports longitude */
     public double getLon() {
         return lon;
     }

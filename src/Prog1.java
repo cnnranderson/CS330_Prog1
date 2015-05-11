@@ -1,3 +1,18 @@
+/*
+Author: Conner Anderson
+Class : CSCI 330 - Relational Databases
+Due   : 4/16/2015
+
+Purpose of this file:
+    This is the main application class of our program. It will
+    read in the initial file (provided by the args) and parse
+    the file it retrieves into Airport objects (See: Airport.java).
+    After the file has been parsed, it will ask for two airports and
+    display the global distance between them in km. Then the program
+    will list how many airports each country has, and the total number
+    of airport entries parsed from the file.
+ */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,6 +32,8 @@ public class Prog1 {
         } else {
             codeTable = new TreeMap<>();
             countryTable = new TreeMap<>();
+
+            // Parse each file line using a quotation-catching regular expression.
             try (BufferedReader br = new BufferedReader(new FileReader(args[0]))) {
                 String line = br.readLine();
 
@@ -31,6 +48,7 @@ public class Prog1 {
             }
         }
 
+        // Request two airport short-names
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the Airport Code of two airports:");
 
@@ -39,6 +57,7 @@ public class Prog1 {
         System.out.print("\nAirport 2: ");
         String ap2 = in.nextLine();
 
+        // If the airports exist, display the distance between them
         if(!codeTable.containsKey(ap1) || !codeTable.containsKey(ap2)) {
             System.err.println("One of the listed airports was not found.");
         } else {
@@ -46,6 +65,7 @@ public class Prog1 {
             System.out.println("\nThe approximate distance between " + ap1 + " and " + ap2 + " is: " + dist + " km");
         }
 
+        // List number of airports that were parsed per country and in total
         System.out.println("\nList of Airports:");
         for(String country : countryTable.keySet()) {
             System.out.println(country + ": " + countryTable.get(country).size() + " airports.");
@@ -53,6 +73,11 @@ public class Prog1 {
         System.out.println("\nThe file has " + codeTable.size() + " airports on record.");
     }
 
+    /**
+     * Parses a data line with known attribute count of 8 and
+     * adds the newly parsed airport information into two tables.
+     * @param data 8 Attribute tuple containing an airport's global information
+     */
     private static void parseAirportData(String[] data) {
         Airport airport;
         if(data.length == 8) {
